@@ -23,48 +23,27 @@ import java.util.Map;
 
 public class MultipleMovingVWAP {
 
+    private MathContext mathContext = new MathContext(6, RoundingMode.DOWN);
+
     public Map <Integer, Map<BigDecimal, BigDecimal>> getMultipleMovingVWAP(List<Trade> tradesList, List<Integer> timeIntervals) {
-
-        MathContext mathContext = new MathContext(6, RoundingMode.DOWN);
-
-        BigDecimal timeIntervalSumSharesNoTimesPrice;
-        BigDecimal timeIntervalSharesNo;
-        BigDecimal timeIntervalVWAP;
-
         BigDecimal timeDiffFractionalSeconds;
-        BigDecimal timeDiffFromSecondZero;
         BigDecimal timeIntervalSpecified;
+        BigDecimal timeDiffFromSecondZero;
 
         Map <Integer, Map<BigDecimal, BigDecimal>> multipleMovingVWAP = new LinkedHashMap<>();
 
         for (int timeInterval : timeIntervals) {
-
             timeIntervalSpecified = new BigDecimal(timeInterval);
             Map <BigDecimal, BigDecimal> movingVWAP = new LinkedHashMap<>();
 
-            iLoop:
             for (int i = 0; i < tradesList.size(); i++) {
-
                 for (int j = i; j < tradesList.size(); j++) {
-
                     timeDiffFractionalSeconds = BigDecimal.valueOf((tradesList.get(j).getTradeTime().getTime() - tradesList.get(i).getTradeTime().getTime())/1000D);
 
                     if (timeDiffFractionalSeconds.compareTo(timeIntervalSpecified) == 0) {
-
-                        timeIntervalSumSharesNoTimesPrice = BigDecimal.ZERO;
-                        timeIntervalSharesNo = BigDecimal.ZERO;
-
-                        for (int k = i; k <= j; k++) {
-                            timeIntervalSumSharesNoTimesPrice = timeIntervalSumSharesNoTimesPrice.add(tradesList.get(k).getTradeQty().multiply(tradesList.get(k).getTradePrice()));
-                            timeIntervalSharesNo = timeIntervalSharesNo.add(tradesList.get(k).getTradeQty());
-                        }
-
-                        timeIntervalVWAP = timeIntervalSumSharesNoTimesPrice.divide(timeIntervalSharesNo, mathContext);
                         timeDiffFromSecondZero = BigDecimal.valueOf((tradesList.get(j).getTradeTime().getTime() - tradesList.get(0).getTradeTime().getTime())/1000D);
-
-                        movingVWAP.put(timeDiffFromSecondZero, timeIntervalVWAP);
-
-                        continue iLoop;
+                        movingVWAP.put(timeDiffFromSecondZero, getTimeIntervalVWAP(tradesList, i, j));
+                        j = tradesList.size() - 1;
                     }
                 }
             }
@@ -73,4 +52,21 @@ public class MultipleMovingVWAP {
         return multipleMovingVWAP;
     }
 
+
+    private BigDecimal getTimeIntervalVWAP (List<Trade> tradesList, int initialTimePoint, int finalTimePoint) {
+        BigDecimal timeIntervalSumSharesNoTimesPrice;
+        BigDecimal timeIntervalSharesNo;
+        BigDecimal timeIntervalVWAP;
+
+        timeIntervalSumSharesNoTimesPrice = BigDecimal.ZERO;
+        timeIntervalSharesNo = BigDecimal.ZERO;
+
+        for (int k = initialTimePoint; k <= finalTimePoint; k++) {
+            timeIntervalSumSharesNoTimesPrice = timeIntervalSumSharesNoTimesPrice.add(tradesList.get(k).getTradeQty().multiply(tradesList.get(k).getTradePrice()));
+            timeIntervalSharesNo = timeIntervalSharesNo.add(tradesList.get(k).getTradeQty());
+        }
+
+        timeIntervalVWAP = timeIntervalSumSharesNoTimesPrice.divide(timeIntervalSharesNo, mathContext);
+        return timeIntervalVWAP;
+    }
 }
