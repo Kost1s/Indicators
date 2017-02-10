@@ -26,34 +26,39 @@ public class MultipleMovingVWAP {
     private MathContext mathContext = new MathContext(6, RoundingMode.DOWN);
 
     public Map <Integer, Map<BigDecimal, BigDecimal>> getMultipleMovingVWAP(List<Trade> tradesList, List<Integer> timeIntervals) {
-        BigDecimal timeDiffFractionalSeconds;
-        BigDecimal timeIntervalSpecified;
-        BigDecimal timeDiffFromSecondZero;
 
         Map <Integer, Map<BigDecimal, BigDecimal>> multipleMovingVWAP = new LinkedHashMap<>();
 
         for (int timeInterval : timeIntervals) {
-            timeIntervalSpecified = new BigDecimal(timeInterval);
-            Map <BigDecimal, BigDecimal> movingVWAP = new LinkedHashMap<>();
-
-            for (int i = 0; i < tradesList.size(); i++) {
-                for (int j = i; j < tradesList.size(); j++) {
-                    timeDiffFractionalSeconds = BigDecimal.valueOf((tradesList.get(j).getTradeTime().getTime() - tradesList.get(i).getTradeTime().getTime())/1000D);
-
-                    if (timeDiffFractionalSeconds.compareTo(timeIntervalSpecified) == 0) {
-                        timeDiffFromSecondZero = BigDecimal.valueOf((tradesList.get(j).getTradeTime().getTime() - tradesList.get(0).getTradeTime().getTime())/1000D);
-                        movingVWAP.put(timeDiffFromSecondZero, getTimeIntervalVWAP(tradesList, i, j));
-                        j = tradesList.size() - 1;
-                    }
-                }
-            }
-            multipleMovingVWAP.put(timeInterval, movingVWAP);
+            multipleMovingVWAP.put(timeInterval, getMovingVWAP(tradesList, timeInterval));
         }
         return multipleMovingVWAP;
     }
 
+    private Map<BigDecimal, BigDecimal> getMovingVWAP (List<Trade> tradesList, int timeInterval){
+
+        Map <BigDecimal, BigDecimal> movingVWAP = new LinkedHashMap<>();
+        BigDecimal timeDiffFractionalSeconds;
+        BigDecimal timeIntervalSpecified;
+        BigDecimal timeDiffFromSecondZero;
+        timeIntervalSpecified = new BigDecimal(timeInterval);
+
+        for (int i = 0; i < tradesList.size(); i++) {
+            for (int j = i; j < tradesList.size(); j++) {
+                timeDiffFractionalSeconds = BigDecimal.valueOf((tradesList.get(j).getTradeTime().getTime() - tradesList.get(i).getTradeTime().getTime())/1000D);
+
+                if (timeDiffFractionalSeconds.compareTo(timeIntervalSpecified) == 0) {
+                    timeDiffFromSecondZero = BigDecimal.valueOf((tradesList.get(j).getTradeTime().getTime() - tradesList.get(0).getTradeTime().getTime())/1000D);
+                    movingVWAP.put(timeDiffFromSecondZero, getTimeIntervalVWAP(tradesList, i, j));
+                    j = tradesList.size() - 1;
+                }
+            }
+        }
+        return movingVWAP;
+    }
 
     private BigDecimal getTimeIntervalVWAP (List<Trade> tradesList, int initialTimePoint, int finalTimePoint) {
+
         BigDecimal timeIntervalSumSharesNoTimesPrice;
         BigDecimal timeIntervalSharesNo;
         BigDecimal timeIntervalVWAP;
