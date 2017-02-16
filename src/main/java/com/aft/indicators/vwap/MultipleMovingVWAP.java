@@ -28,10 +28,12 @@ public class MultipleMovingVWAP {
     public Map <Integer, Map<BigDecimal, BigDecimal>> getMultipleMovingVWAP(List<Trade> tradesList, List<Integer> timeIntervals) {
         Map <Integer, Map<BigDecimal, BigDecimal>> multipleMovingVWAP = new LinkedHashMap<>();
 
-        for (int timeInterval : timeIntervals) {
+        timeIntervals.parallelStream().forEach(timeInterval -> multipleMovingVWAP.put(timeInterval, getMovingVWAP(tradesList, timeInterval)));
+
+        /*for (int timeInterval : timeIntervals) {
             multipleMovingVWAP.put(timeInterval, getMovingVWAP(tradesList, timeInterval));
         }
-        return multipleMovingVWAP;
+        return multipleMovingVWAP;*/
     }
 
     private Map<BigDecimal, BigDecimal> getMovingVWAP (List<Trade> tradesList, int timeInterval){
@@ -64,10 +66,16 @@ public class MultipleMovingVWAP {
         timeIntervalSumSharesNoTimesPrice = BigDecimal.ZERO;
         timeIntervalSharesNo = BigDecimal.ZERO;
 
-        for (int k = initialTimePoint; k <= finalTimePoint; k++) {
+        tradesList.parallelStream()
+                .filter(trade -> tradesList.indexOf(trade) >= initialTimePoint && tradesList.indexOf(trade) <= finalTimePoint)
+                .forEach({trade ->
+                        timeIntervalSumSharesNoTimesPrice = timeIntervalSumSharesNoTimesPrice.add(trade));
+                });
+
+        /*for (int k = initialTimePoint; k <= finalTimePoint; k++) {
             timeIntervalSumSharesNoTimesPrice = timeIntervalSumSharesNoTimesPrice.add(tradesList.get(k).getTradeQty().multiply(tradesList.get(k).getTradePrice()));
             timeIntervalSharesNo = timeIntervalSharesNo.add(tradesList.get(k).getTradeQty());
-        }
+        }*/
         timeIntervalVWAP = timeIntervalSumSharesNoTimesPrice.divide(timeIntervalSharesNo, mathContext);
         return timeIntervalVWAP;
     }
