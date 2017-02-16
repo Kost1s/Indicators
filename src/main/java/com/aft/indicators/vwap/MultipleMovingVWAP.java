@@ -30,10 +30,10 @@ public class MultipleMovingVWAP {
 
         timeIntervals.parallelStream().forEach(timeInterval -> multipleMovingVWAP.put(timeInterval, getMovingVWAP(tradesList, timeInterval)));
 
-        /*for (int timeInterval : timeIntervals) {
+       /* for (int timeInterval : timeIntervals) {
             multipleMovingVWAP.put(timeInterval, getMovingVWAP(tradesList, timeInterval));
-        }
-        return multipleMovingVWAP;*/
+        }*/
+        return multipleMovingVWAP;
     }
 
     private Map<BigDecimal, BigDecimal> getMovingVWAP (List<Trade> tradesList, int timeInterval){
