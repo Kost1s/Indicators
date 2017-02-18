@@ -29,7 +29,7 @@ public class MultipleMovingVWAP {
 
     private MathContext mathContext = new MathContext(6, RoundingMode.DOWN);
 
-    public Map <Integer, Map<BigDecimal, BigDecimal>> getMultipleMovingVWAP(List<Trade> tradesList, List<Integer> timeIntervals) {
+    public final Map <Integer, Map<BigDecimal, BigDecimal>> getMultipleMovingVWAP(List<Trade> tradesList, List<Integer> timeIntervals) {
         Map <Integer, Map<BigDecimal, BigDecimal>> multipleMovingVWAP = new LinkedHashMap<>();
 
         for (int timeInterval : timeIntervals) {
