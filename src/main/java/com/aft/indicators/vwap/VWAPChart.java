@@ -40,8 +40,8 @@ public class VWAPChart extends Application {
 
         csvFile = "/6CH6.txt";
 
-        tradesList = new TradesList().getTrades(csvFile);
         vwapIntervals = new TimeIntervalsList().getTimeIntervals();
+        tradesList = new TradesList().getTrades(csvFile);
         multipleMovingVWAP = new MultipleMovingVWAP().getMultipleMovingVWAP(tradesList, vwapIntervals);
 
         // End of relevant VWAP calculations

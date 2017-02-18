@@ -8,6 +8,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 /**
  *
  * com.aft.indicators.vwap.MultipleMovingVWAP.java
@@ -22,6 +25,7 @@ import java.util.Map;
 **/
 
 public class MultipleMovingVWAP {
+    private static final Logger LOGGER = Logger.getLogger( TradesList.class.getName() );
 
     private MathContext mathContext = new MathContext(6, RoundingMode.DOWN);
 
@@ -35,6 +39,8 @@ public class MultipleMovingVWAP {
     }
 
     private Map<BigDecimal, BigDecimal> getMovingVWAP (List<Trade> tradesList, int timeInterval){
+        long startTime = System.currentTimeMillis();
+
         Map <BigDecimal, BigDecimal> movingVWAP = new LinkedHashMap<>();
         BigDecimal timeDiffFractionalSeconds;
         BigDecimal timeIntervalSpecified;
@@ -53,10 +59,15 @@ public class MultipleMovingVWAP {
                 }
             }
         }
+        long stopTime = System.currentTimeMillis();
+        long elapsedTime = stopTime - startTime;
+        System.out.println("getMovingVWAPm:" + elapsedTime);
         return movingVWAP;
     }
 
     private BigDecimal getTimeIntervalVWAP (List<Trade> tradesList, int initialTimePoint, int finalTimePoint) {
+        long startTime = System.currentTimeMillis();
+
         BigDecimal timeIntervalSumSharesNoTimesPrice;
         BigDecimal timeIntervalSharesNo;
         BigDecimal timeIntervalVWAP;
@@ -69,6 +80,11 @@ public class MultipleMovingVWAP {
             timeIntervalSharesNo = timeIntervalSharesNo.add(tradesList.get(k).getTradeQty());
         }
         timeIntervalVWAP = timeIntervalSumSharesNoTimesPrice.divide(timeIntervalSharesNo, mathContext);
+
+        long stopTime = System.currentTimeMillis();
+        long elapsedTime = stopTime - startTime;
+        System.out.println("timeIntervalVWAPm:" + elapsedTime);
+
         return timeIntervalVWAP;
     }
 }
