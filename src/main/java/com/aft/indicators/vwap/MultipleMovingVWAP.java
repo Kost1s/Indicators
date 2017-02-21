@@ -84,7 +84,6 @@ public class MultipleMovingVWAP {
         long stopTime = System.currentTimeMillis();
         long elapsedTime = stopTime - startTime;
         System.out.println("timeIntervalVWAPm:" + elapsedTime);
-
         return timeIntervalVWAP;
     }
 }
