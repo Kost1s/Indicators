@@ -47,6 +47,8 @@ public class MultipleMovingVWAP {
         BigDecimal timeDiffFromSecondZero;
         timeIntervalSpecified = new BigDecimal(timeInterval);
 
+        int p = Utilities.getIndex(tradesList, timeInterval);
+
         for (int i = 0; i < tradesList.size(); i++) {
             for (int j = i; j < tradesList.size(); j++) {
 
