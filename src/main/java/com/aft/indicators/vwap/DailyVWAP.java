@@ -15,13 +15,13 @@ import java.math.*;
  *
 **/
 
-class DailyVWAP {
+public class DailyVWAP {
 
     private DailyVWAP() {
         //Intentionally Blank
     }
 
-    static BigDecimal getDailyVWAP(List<Trade> tradesList) {
+    public static BigDecimal getDailyVWAP(List<Trade> tradesList) {
 
         MathContext mathContext = new MathContext(4, RoundingMode.HALF_UP);
 
