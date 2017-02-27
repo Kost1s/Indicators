@@ -9,35 +9,39 @@ import java.util.List;
 public class Utilities {
 
     public static int getIndex(List<Trade> tradesList, int timeInterval) {
-        long startTime = System.currentTimeMillis();
+        /*long startTime = System.currentTimeMillis();*/
 
         BigDecimal timeIntervalSpecified = new BigDecimal(timeInterval);
-        BigDecimal timeDiffFractionalSeconds;
-
-        int firstElement = 0;
-        int lastElement = tradesList.size();
+        BigDecimal timeDiffFractionalSeconds = BigDecimal.ZERO;
         int midElement = 0;
 
-        // Starting binary search
-        while (firstElement <= lastElement) {
+        for (int startingPoint = 0; startingPoint < tradesList.size(); startingPoint++) {
+            int firstElement = 0;
+            int lastElement = tradesList.size() - 1;
 
-            midElement = (lastElement + firstElement)/2;
-            timeDiffFractionalSeconds = BigDecimal.valueOf((tradesList.get(midElement).getTradeTime().getTime() - tradesList.get(firstElement).getTradeTime().getTime()) / 1000D);
+            // Starting binary search
+            while (firstElement <= lastElement) {
 
-            if (timeDiffFractionalSeconds.compareTo(timeIntervalSpecified) > 0) {
-                lastElement = midElement - (lastElement % 2) ;
-            }
+                midElement = firstElement + (lastElement - firstElement) / 2;
 
-            if (timeDiffFractionalSeconds.compareTo(timeIntervalSpecified) < 0){
-                lastElement = tradesList.size();
-                firstElement = firstElement + 1;
-            }
+                timeDiffFractionalSeconds = BigDecimal.valueOf((tradesList.get(midElement).getTradeTime().getTime() - tradesList.get(startingPoint).getTradeTime().getTime()) / 1000D);
 
-            if (timeDiffFractionalSeconds.compareTo(timeIntervalSpecified) == 0){
-                int found = midElement;
-                long stopTime = System.currentTimeMillis();
-                long elapsedTime = stopTime - startTime;
-                System.out.println("getIndexm:" + elapsedTime);
+                if (timeDiffFractionalSeconds.compareTo(timeIntervalSpecified) > 0) {
+                    lastElement = midElement - 1;
+                }
+
+                if (timeDiffFractionalSeconds.compareTo(timeIntervalSpecified) < 0) {
+                    firstElement = midElement + 1;
+                }
+
+                if (timeDiffFractionalSeconds.compareTo(timeIntervalSpecified) == 0) {
+                    int found = midElement;
+                    firstElement = lastElement + 1;
+                    /*long stopTime = System.currentTimeMillis();
+                    long elapsedTime = stopTime - startTime;
+                    System.out.println("getIndexm:" + elapsedTime);*/
+                }
+
             }
 
         }

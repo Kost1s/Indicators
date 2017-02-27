@@ -39,7 +39,7 @@ public class MultipleMovingVWAP {
     }
 
     private Map<BigDecimal, BigDecimal> getMovingVWAP (List<Trade> tradesList, int timeInterval){
-        long startTime = System.currentTimeMillis();
+
 
         Map <BigDecimal, BigDecimal> movingVWAP = new LinkedHashMap<>();
         BigDecimal timeDiffFractionalSeconds;
@@ -47,7 +47,12 @@ public class MultipleMovingVWAP {
         BigDecimal timeDiffFromSecondZero;
         timeIntervalSpecified = new BigDecimal(timeInterval);
 
+        long startTime = System.currentTimeMillis();
         int p = Utilities.getIndex(tradesList, timeInterval);
+        long stopTime = System.currentTimeMillis();
+        long elapsedTime = stopTime - startTime;
+        System.out.println("getMovingVWAPm:" + elapsedTime);
+
 
         for (int i = 0; i < tradesList.size(); i++) {
             for (int j = i; j < tradesList.size(); j++) {
@@ -61,9 +66,6 @@ public class MultipleMovingVWAP {
                 }
             }
         }
-        long stopTime = System.currentTimeMillis();
-        long elapsedTime = stopTime - startTime;
-        System.out.println("getMovingVWAPm:" + elapsedTime);
         return movingVWAP;
     }
 
