@@ -39,8 +39,7 @@ public class MultipleMovingVWAP {
     }
 
     private Map<BigDecimal, BigDecimal> getMovingVWAP (List<Trade> tradesList, int timeInterval){
-
-
+        
         Map <BigDecimal, BigDecimal> movingVWAP = new LinkedHashMap<>();
         BigDecimal timeDiffFractionalSeconds;
         BigDecimal timeIntervalSpecified;
