@@ -11,31 +11,31 @@ public class Utilities {
     public static int getIndex(List<Trade> tradesList, int timeInterval) {
         /*long startTime = System.currentTimeMillis();*/
 
-        BigDecimal timeIntervalSpecified = new BigDecimal(timeInterval);
-        BigDecimal timeDiffFractionalSeconds = BigDecimal.ZERO;
-        int midElement = 0;
+        Long timeIntervalL = timeInterval*1000L;
+        int midElement;
+        int endingPoint = 0;
 
         for (int startingPoint = 0; startingPoint < tradesList.size(); startingPoint++) {
             int firstElement = 0;
             int lastElement = tradesList.size() - 1;
+            Long endingPointTime = tradesList.get(startingPoint).getTradeTime().getTime() + timeIntervalL;
 
             // Starting binary search
             while (firstElement <= lastElement) {
 
                 midElement = firstElement + (lastElement - firstElement) / 2;
+                Long midElementTime = tradesList.get(midElement).getTradeTime().getTime();
 
-                timeDiffFractionalSeconds = BigDecimal.valueOf((tradesList.get(midElement).getTradeTime().getTime() - tradesList.get(startingPoint).getTradeTime().getTime()) / 1000D);
-
-                if (timeDiffFractionalSeconds.compareTo(timeIntervalSpecified) > 0) {
+                if (midElementTime > endingPointTime) {
                     lastElement = midElement - 1;
                 }
 
-                if (timeDiffFractionalSeconds.compareTo(timeIntervalSpecified) < 0) {
+                if (midElementTime < endingPointTime) {
                     firstElement = midElement + 1;
                 }
 
-                if (timeDiffFractionalSeconds.compareTo(timeIntervalSpecified) == 0) {
-                    int found = midElement;
+                if (midElementTime.equals(endingPointTime)) {
+                    endingPoint = midElement;
                     firstElement = lastElement + 1;
                     /*long stopTime = System.currentTimeMillis();
                     long elapsedTime = stopTime - startTime;
@@ -45,7 +45,7 @@ public class Utilities {
             }
 
         }
-        return midElement;
+        return endingPoint;
     }
 }
 
