@@ -51,14 +51,16 @@ public class MultipleMovingVWAP {
         long stopTime = System.currentTimeMillis();
         long elapsedTime = stopTime - startTime;
         System.out.println("getMovingVWAPm:" + elapsedTime);*/
-
+        int k = 0;
 
         for (int i = 0; i < tradesList.size(); i++) {
-            for (int j = i; j < tradesList.size(); j++) {
+            if(k==0) k  = i + 1;
+            for (int j = k; j < tradesList.size(); j++) {
 
                 timeDiffFractionalSeconds = BigDecimal.valueOf((tradesList.get(j).getTradeTime().getTime() - tradesList.get(i).getTradeTime().getTime())/1000D);
-
+                if (timeDiffFractionalSeconds.compareTo(timeIntervalSpecified) > 0) j = tradesList.size() - 1;
                 if (timeDiffFractionalSeconds.compareTo(timeIntervalSpecified) == 0) {
+                    k = j + 1;
                     timeDiffFromSecondZero = BigDecimal.valueOf((tradesList.get(j).getTradeTime().getTime() - tradesList.get(0).getTradeTime().getTime())/1000D);
                     movingVWAP.put(timeDiffFromSecondZero, getTimeIntervalVWAP(tradesList, i, j));
                     j = tradesList.size() - 1;
