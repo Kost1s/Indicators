@@ -46,11 +46,11 @@ public class MultipleMovingVWAP {
         BigDecimal timeDiffFromSecondZero;
         timeIntervalSpecified = new BigDecimal(timeInterval);
 
-        long startTime = System.currentTimeMillis();
+        /*long startTime = System.currentTimeMillis();
         int p = Utilities.getIndex(tradesList, timeInterval);
         long stopTime = System.currentTimeMillis();
         long elapsedTime = stopTime - startTime;
-        System.out.println("getMovingVWAPm:" + elapsedTime);
+        System.out.println("getMovingVWAPm:" + elapsedTime);*/
 
 
         for (int i = 0; i < tradesList.size(); i++) {
