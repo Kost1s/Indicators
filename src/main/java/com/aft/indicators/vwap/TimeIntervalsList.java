@@ -8,8 +8,6 @@ import java.util.*;
  * Purpose: Gets VWAP time intervals as an input from the user in the form of non zero positive integers
  *          and stores them in an ArrayList.
  *
- * Scope: Package local.
- *
  * @author Kostis
  *
 **/

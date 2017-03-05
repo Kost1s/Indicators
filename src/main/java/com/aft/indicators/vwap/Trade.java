@@ -2,7 +2,6 @@ package com.aft.indicators.vwap;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 /**
  *  com.aft.indicators.vwap.Trade.java
@@ -13,14 +12,10 @@ import java.time.LocalDateTime;
  *           - com.aft.indicators.vwap.Trade Price
  *           - com.aft.indicators.vwap.Trade Quantity
  *
- *  Scope: Package local.
- *
  *  @author Kostis
 **/
 
 public class Trade {
-
-	//private LocalDateTime tradeDateTime;
 
 	private final BigDecimal tradePrice;
  	private final BigDecimal tradeQty;
