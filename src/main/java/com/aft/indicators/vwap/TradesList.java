@@ -31,7 +31,6 @@ public class TradesList {
     private static final Logger LOGGER = Logger.getLogger( TradesList.class.getName() );
 
     public List <Trade> getTrades(String file) {
-        long startTime = System.currentTimeMillis();
 
         List<Trade> tradesList = new ArrayList<>();
 
@@ -56,9 +55,6 @@ public class TradesList {
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, e.toString(), e);
         }
-        long stopTime = System.currentTimeMillis();
-        long elapsedTime = stopTime - startTime;
-        System.out.println("getTrades:" + elapsedTime);
         return tradesList;
     }
 
