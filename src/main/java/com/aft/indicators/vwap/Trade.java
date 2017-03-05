@@ -17,9 +17,7 @@ import java.time.LocalDateTime;
 **/
 
 public class Trade {
-
-	//private LocalDateTime tradeDateTime;
-
+	
 	private final BigDecimal tradePrice;
  	private final BigDecimal tradeQty;
  	private final Timestamp tradeTime;
