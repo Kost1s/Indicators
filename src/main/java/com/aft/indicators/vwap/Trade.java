@@ -13,8 +13,6 @@ import java.time.LocalDateTime;
  *           - com.aft.indicators.vwap.Trade Price
  *           - com.aft.indicators.vwap.Trade Quantity
  *
- *  Scope: Package local.
- *
  *  @author Kostis
 **/
 

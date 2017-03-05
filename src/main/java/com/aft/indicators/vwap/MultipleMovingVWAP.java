@@ -15,8 +15,6 @@ import java.util.Map;
  * Purpose: Takes a list of trades and a list of time intervals as inputs and computes the relevant moving VWAPs
  *          times series according to the time intervals specified. Time intervals unit is seconds.
  *
- * Scope: Package local
- *
  * @author Kostis
  *
 **/

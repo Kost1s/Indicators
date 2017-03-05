@@ -9,8 +9,6 @@ import java.math.*;
  *
  * Purpose: Takes a list of trades done within a day and computes the day's VWAP.
  *
- * Scope: Package local.
- *
  * @author Kostis
  *
 **/
