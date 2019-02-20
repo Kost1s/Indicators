@@ -26,6 +26,7 @@ import java.io.*;
  *
 **/
 
+// todo possibly a formal csv reader here and then a trades list builder
 public class TradesList {
 
     private static final Logger LOGGER = Logger.getLogger( TradesList.class.getName() );

@@ -22,18 +22,11 @@ public class Trade {
  	private final Timestamp tradeTime;
 	private final int tradeNo;
 
-	private String trimmedTradeTime;
-	private String valueTradeTime;
-
 	public Trade (String[] tradeLine, int tradesListSize) {
-		valueTradeTime = tradeLine[5];
-		valueTradeTime = valueTradeTime.replace('"', ' ');
-		trimmedTradeTime = valueTradeTime.trim();
-
-		this.tradeNo = tradesListSize + 1;
-		this.tradeTime = Timestamp.valueOf(trimmedTradeTime);
-		this.tradePrice = new BigDecimal(tradeLine[6]);
-		this.tradeQty = new BigDecimal(tradeLine[7]);
+		tradeNo = tradesListSize + 1;
+		tradeTime = Timestamp.valueOf(tradeLine[5].replace('"', ' ').trim());
+		tradePrice = new BigDecimal(tradeLine[6]);
+		tradeQty = new BigDecimal(tradeLine[7]);
 	}
 
 	public Timestamp getTradeTime() {
