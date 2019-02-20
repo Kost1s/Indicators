@@ -1,4 +1,4 @@
-package com.aft.indicators.vwap;
+package com.kap.indicators.vwap;
 
 import java.math.BigDecimal;
 import java.math.MathContext;

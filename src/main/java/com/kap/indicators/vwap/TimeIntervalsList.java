@@ -1,9 +1,9 @@
-package com.aft.indicators.vwap;
+package com.kap.indicators.vwap;
 
 import java.util.*;
 
 /**
- * com.aft.indicators.vwap.TimeIntervalsList.java
+ * TimeIntervalsList.java
  *
  * Purpose: Gets VWAP time intervals as an input from the user in the form of non zero positive integers
  *          and stores them in an ArrayList.

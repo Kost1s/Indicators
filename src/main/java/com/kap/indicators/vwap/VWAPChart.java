@@ -1,4 +1,4 @@
-package com.aft.indicators.vwap;
+package com.kap.indicators.vwap;
 
 import javafx.application.Application;
 import javafx.scene.chart.NumberAxis;
@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  *
- * com.aft.indicators.vwap.VWAPChart.java
+ * VWAPChart.java
  *
  * Purpose: Serves as main function for running the application of getting the user time interval inputs,
  *          computing the relevant moving VWAP instances and then outputting these instances overlaid in an

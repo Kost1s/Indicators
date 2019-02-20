@@ -1,16 +1,16 @@
-package com.aft.indicators.vwap;
+package com.kap.indicators.vwap;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
- *  com.aft.indicators.vwap.Trade.java
+ *  Trade.java
  *
  *  Purpose: Creates a trade object with the following fields:
- *           - com.aft.indicators.vwap.Trade No.
- *           - com.aft.indicators.vwap.Trade Time
- *           - com.aft.indicators.vwap.Trade Price
- *           - com.aft.indicators.vwap.Trade Quantity
+ *           - Trade No.
+ *           - Trade Time
+ *           - Trade Price
+ *           - Trade Quantity
  *
  *  @author Kostis
 **/
@@ -50,7 +50,7 @@ public class Trade {
 
 	@Override
 	public String toString() {
-		return "com.aft.indicators.vwap.Trade{" +
+		return "Trade{" +
 				"tradePrice=" + tradePrice +
 				", tradeQty=" + tradeQty +
 				", tradeTime=" + tradeTime +

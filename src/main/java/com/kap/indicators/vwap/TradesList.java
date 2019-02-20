@@ -1,4 +1,4 @@
-package com.aft.indicators.vwap;
+package com.kap.indicators.vwap;
 
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -7,7 +7,7 @@ import java.io.*;
 
 /**
  *
- * com.aft.indicators.vwap.TradesList.java
+ * TradesList.java
  *
  * Purpose: Takes a text file as an input. The file contains a full day's ORC order book data.
  *
