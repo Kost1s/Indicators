@@ -22,7 +22,7 @@ import java.io.*;
  *          Reads that file, identifies which transactions are trades, works together with the trade
  *          class to create these trades and then puts them in an ArrayList.
  *
- * @author Kostis
+ * @author Konstantinos Antoniou
  *
 **/
 
