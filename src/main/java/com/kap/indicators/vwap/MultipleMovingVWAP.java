@@ -32,12 +32,12 @@ public class MultipleMovingVWAP {
         int endingPoint;
         Long endingPointTime;
         for (int startingPoint = 0; startingPoint < tradesList.size(); startingPoint++) {
-            endingPointTime = tradesList.get(startingPoint).getTradeTime().getTime() + timeIntervalL;
+            endingPointTime = tradesList.get(startingPoint).getTradeTime().toEpochMilli() + timeIntervalL;
             endingPoint = getEndingPoint(tradesList, endingPointTime);
 
             if (endingPoint != -1) {
-                timeDiffFromSecondZero = BigDecimal.valueOf((tradesList.get(endingPoint).getTradeTime().getTime() -
-                                                             tradesList.get(0).getTradeTime().getTime()) / 1000D);
+                timeDiffFromSecondZero = BigDecimal.valueOf((tradesList.get(endingPoint).getTradeTime().toEpochMilli() -
+                                                             tradesList.get(0).getTradeTime().toEpochMilli()) / 1000D);
                 movingVWAP.put(timeDiffFromSecondZero, getTimeIntervalVWAP(tradesList, startingPoint, endingPoint));
             }
         }
@@ -64,7 +64,7 @@ public class MultipleMovingVWAP {
         while (firstElement <= lastElement) {
 
             midElement = firstElement + ((lastElement - firstElement) / 2);
-            Long midElementTime = tradesList.get(midElement).getTradeTime().getTime();
+            Long midElementTime = tradesList.get(midElement).getTradeTime().toEpochMilli();
 
             if (midElementTime > endingPointTime) {
                 lastElement = midElement - 1;
