@@ -1,20 +1,12 @@
 package com.kap.indicators.vwap;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggerFactory;
 
 import java.util.*;
 
 /**
- * TimeIntervalsList.java
- *
- * Purpose: Gets VWAP time intervals as an input from the user in the form of non zero positive integers
- *          and stores them in an ArrayList.
- *
- * @author Kostis
- *
-**/
-
+ * @author Konstantinos Antoniou
+ */
 public class TimeIntervalsList {
 
     private static final Logger LOGGER = Logger.getLogger(TimeIntervalsList.class);
@@ -24,20 +16,24 @@ public class TimeIntervalsList {
     private static final String ERROR_MESSAGE = "The number you provided is wrong. Please provide a non zero positive integer.";
     private static final String STOP_TOKEN = "stop";
 
-    private List<Integer> timeIntervals = new ArrayList<>();
-    private Scanner timeIntervalsScanner = new Scanner(System.in);
+    private final List<Integer> timeIntervals = new ArrayList<>();
+    private final Scanner timeIntervalsScanner = new Scanner(System.in);
 
+    /**
+     * Gets VWAP time intervals as an input from the user in the form of non zero positive integers
+     * and stores them in an ArrayList.
+     *
+     * @return an ArrayList with the requested VWAP time intervals
+     */
     public List<Integer> getTimeIntervals() {
 
-        LOGGER.debug(TimeIntervalsList.START_STRING);
+        LOGGER.info(TimeIntervalsList.START_STRING);
 
-        //System.out.println(TimeIntervalsList.START_STRING);
         String input;
-
         while (timeIntervalsScanner.hasNextLine()) {
             input = timeIntervalsScanner.nextLine();
             if (TimeIntervalsList.STOP_TOKEN.equals(input)) {
-                System.out.println(TimeIntervalsList.STOP_STRING);
+                LOGGER.info(TimeIntervalsList.STOP_STRING);
                 break;
             } else {
                 checkTimeInterval(input);
@@ -62,7 +58,7 @@ public class TimeIntervalsList {
                 timeIntervals.add(timeInterval);
             }
         } catch (NumberFormatException e) {
-            System.out.println(TimeIntervalsList.ERROR_MESSAGE);
+            LOGGER.error(TimeIntervalsList.ERROR_MESSAGE);
         }
     }
 }
