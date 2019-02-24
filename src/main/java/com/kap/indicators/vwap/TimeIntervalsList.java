@@ -11,9 +11,11 @@ public class TimeIntervalsList {
 
     private static final Logger LOGGER = Logger.getLogger(TimeIntervalsList.class);
 
-    private static final String START_STRING = "Please provide your preferred VWAP time intervals in the form of non zero positive integers. " +
-                                               "\nEnter your intervals one under the other and for each entry press enter. " +
-                                               "\nWhen you are finished specifying the intervals type 'stop' and press enter.";
+    private static final String START_STRING =
+            "Please provide your preferred VWAP time intervals in the form of non zero positive integers. " +
+            "\nEnter your intervals one under the other and for each entry press enter. " +
+            "\nWhen you are finished specifying the intervals type 'stop' and press enter.";
+
     private static final String STOP_STRING = "The definition of VWAP time intervals has now finished.";
     private static final String ERROR_MESSAGE = "The number you provided is wrong. Please provide a non zero positive integer.";
     private static final String STOP_TOKEN = "stop";
