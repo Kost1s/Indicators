@@ -8,29 +8,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Map;
 
 /**
- *
- * VWAPChart.java
- *
- * Purpose: Serves as main function for running the application of getting the user time interval inputs,
- *          computing the relevant moving VWAP instances and then outputting these instances overlaid in an
- *          XY chart.
- *
- * @author Kostis
- *
+ * @author Konstantinos Antoniou
 **/
-
 public class VWAPChart extends Application {
 
     public void start(Stage stage) {
-
         Map <Integer, Map<BigDecimal, BigDecimal>> multipleMovingVWAP;
-
-        List <Integer> vwapIntervals;
-        List <Trade> tradesList;
 
         String csvFile;
 
@@ -39,10 +25,8 @@ public class VWAPChart extends Application {
         // -----------------------------------------------------
 
         csvFile = "/6CH6.txt";
-
-        vwapIntervals = new TimeIntervalsList().getTimeIntervals();
-        tradesList = new TradesList().getTrades(csvFile);
-        multipleMovingVWAP = new MultipleMovingVWAP().getMultipleMovingVWAP(tradesList, vwapIntervals);
+        multipleMovingVWAP = new MultipleMovingVWAP().getMultipleMovingVWAP(new TradesList().getTrades(csvFile),
+                                                                            new TimeIntervalsList().getTimeIntervals());
 
         // End of relevant VWAP calculations
         // ---------------------------------
@@ -57,9 +41,8 @@ public class VWAPChart extends Application {
         xAxis.setLabel("Seconds");
 
         for(Map.Entry <Integer, Map<BigDecimal, BigDecimal>> timeInterval : multipleMovingVWAP.entrySet()) {
-
             XYChart.Series <Number, Number> series = new XYChart.Series <>();
-            series.setName(String.valueOf(timeInterval.getKey()) + " Seconds VWAP");
+            series.setName(timeInterval.getKey() + " Seconds VWAP");
 
             for(Map.Entry <BigDecimal, BigDecimal> pointInTime : timeInterval.getValue().entrySet()) {
                 series.getData().add(new XYChart.Data <> (pointInTime.getKey(), pointInTime.getValue()));
@@ -71,7 +54,12 @@ public class VWAPChart extends Application {
             stage.show();
         }
 
-
+    /**
+     * Serves as main function for running the application of getting the user time interval inputs,
+     * computing the relevant moving VWAP instances and then outputting these instances overlaid in an XY chart.
+     *
+     * @param args arguments passes in the method
+     */
     public static void main(String[] args) {
         launch(args);
     }
