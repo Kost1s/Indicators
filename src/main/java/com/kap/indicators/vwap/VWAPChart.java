@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  * @author Konstantinos Antoniou
-**/
+ */
 public class VWAPChart extends Application {
 
     public void start(Stage stage) {
