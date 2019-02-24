@@ -18,18 +18,9 @@ public class VWAPChart extends Application {
     public void start(Stage stage) {
         Map <Integer, Map<BigDecimal, BigDecimal>> multipleMovingVWAP;
 
-        String csvFile;
-
-        // This is the place where all the relevant calculations
-        // for multiple VWAPs are done.
-        // -----------------------------------------------------
-
-        csvFile = "/6CH6.txt";
+        String csvFile = "/6CH6.txt";
         multipleMovingVWAP = new MultipleMovingVWAP().getMultipleMovingVWAP(new TradesList().getTrades(csvFile),
                                                                             new TimeIntervalsList().getTimeIntervals());
-
-        // End of relevant VWAP calculations
-        // ---------------------------------
 
         final NumberAxis xAxis = new NumberAxis();
         final NumberAxis yAxis = new NumberAxis("VWAP Values", 0.711d, 0.720d, 0.00001);
@@ -49,7 +40,6 @@ public class VWAPChart extends Application {
             }
             lineChart.getData().add(series);
         }
-
             stage.setScene(scene);
             stage.show();
         }
