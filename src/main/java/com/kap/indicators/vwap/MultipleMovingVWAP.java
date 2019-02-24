@@ -47,6 +47,7 @@ public class MultipleMovingVWAP {
     private BigDecimal getTimeIntervalVWAP(List<Trade> tradesList, int initialTimePoint, int finalTimePoint) {
         BigDecimal timeIntervalSumSharesNoTimesPrice = BigDecimal.ZERO;
         BigDecimal timeIntervalSharesNo = BigDecimal.ZERO;
+
         for (int k = initialTimePoint; k <= finalTimePoint; k++) {
             timeIntervalSumSharesNoTimesPrice = timeIntervalSumSharesNoTimesPrice.add(
                     tradesList.get(k).getTradeQty().multiply(tradesList.get(k).getTradePrice()));
