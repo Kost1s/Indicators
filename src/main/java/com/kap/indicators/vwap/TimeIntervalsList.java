@@ -26,7 +26,6 @@ public class TimeIntervalsList {
      * @return an ArrayList with the requested VWAP time intervals
      */
     public List<Integer> getTimeIntervals() {
-
         LOGGER.info(TimeIntervalsList.START_STRING);
 
         String input;
